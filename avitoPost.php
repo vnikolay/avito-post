@@ -23,12 +23,12 @@ $avitoPost->post($data,'iphone_case');
 class AvitoPost {
 
     public $debug = 0;
-    public $apiKey = '24f84a06b7a508cd06c590836bcc6d73';
+    public $apiKey = '';
 
     public $avitoLoginUrl = 'https://www.avito.ru/profile/login';
 
-    public $avitoLogin = 'igor.v.cherkasov@gmail.com';
-    public $avitoPassword = '3b9ac9ff';
+    public $avitoLogin = '';
+    public $avitoPassword = '';
 
     public $avitoFirstPostUrl = 'http://www.avito.ru/additem';
     public $avitoFinalPostUrl = 'http://www.avito.ru/additem/confirm';
@@ -41,23 +41,51 @@ class AvitoPost {
 
     private $postFirstSubmit = 'main_form_submit';
 
-    public $postSellerName = 'igor.v';
-    public $postSellerEmail = 'igor.v.cherkasov@gmail.com';
+    public $postSellerName = 'Дарья';
+    public $postSellerEmail = '';
     public $postAllowEmails = '1';
-    public $postSellerPhone = '8 343 345-25-31';
+    public $postSellerPhone = '';
     public $postLocationId = '654070';
 
     private $postCategoryConfig = array('iphone_case' => '84',
-                                        'ipad_case' => '96');
+                                        'ipad_case' => '96',
+                                        'iphone' => '84',
+                                        'ipad'=>'96',
+                                        'macbook'=>'98',
+                                        'imac' => '31',
+                                        'ipod' => '32',
+                                        'macbook_case' => '101',
+                                        'battery' => '84',
+                                        'cable_and_adapter' => '99',
+                                        'auto_accessory' => '10',
+                                        'books' => '83');
 
     private $postParamsConfig = array('iphone_case' =>
-                                    array('params[143]' => '4987',
-                                          'params[480]' => '4993'),
+                                            array('params[143]' => '4987',
+                                                  'params[480]' => '4993'),
 
                                       'ipad_case' =>
-                                    array('params[140]' => '4997',
-                                          'params[481]' => '5005')
-                                    );
+                                            array('params[140]' => '4997',
+                                                  'params[481]' => '5005'),
+                                      'iphone' =>
+                                            array('params[143]' => '623'),
+                                      'ipad' =>
+                                            array('params[140]' => '4995'),
+                                      'ipod' =>
+                                            array('params[132]' => '601'),
+                                      'macbook_case' =>
+                                            array('params[483]' => '6666'),
+                                      'battery' =>
+                                            array('params[143]' => '4987',
+                                                  'params[480]' => '4988'),
+                                      'cable_and_adapter' =>
+                                            array('params[148]' => '643',
+                                                  'params[485]' => '5047'),
+                                      'auto_accessory' =>
+                                            array('params[5]' => '4943'),
+                                      'books' =>
+                                            array('params[167]' => '693')
+                                     );
 
     public $fileName = 'captcha.jpg';
 
@@ -112,8 +140,10 @@ class AvitoPost {
 
         $post['category_id'] = $this->postCategoryConfig[$type];
 
-        foreach ($this->postParamsConfig[$type] as $p_name => $p_value) {
-            $post[$p_name] = $p_value;
+        if (isset($this->postParamsConfig[$type])) {
+            foreach ($this->postParamsConfig[$type] as $p_name => $p_value) {
+                $post[$p_name] = $p_value;
+            }
         }
 
         $post['service_code'] = 'free';
