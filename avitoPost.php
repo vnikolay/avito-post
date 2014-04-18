@@ -45,9 +45,12 @@ class avitoPost {
     public $postAllowEmails = '1';
     public $postSellerPhone = '8 343 345-25-31';
     public $postLocationId = '654070';
-    public $postParams = array('iphone' => '623');
 
-    public $postCategory = array('telephone'=>'84');
+    private $postCategoryConfig = array('iphone_case' => '84');
+
+    private $postParamsConfig = array('iphone_case' =>
+                                    array('params[143]' => '4987',
+                                          'params[480]' => '4993'));
 
     public $fileName = 'captcha.jpg';
 
@@ -80,7 +83,7 @@ class avitoPost {
         return $this;
     }
 
-    public function post($data) {
+    public function post($data,$type) {
 
         $pingPage = $this->curlExec($this->avitoFirstPostUrl,array(),'get');
 
@@ -90,7 +93,7 @@ class avitoPost {
             print " \n im not logged in, logginning \n ";
             $this->login();
             sleep(5);
-            return $this->post($data);
+            return $this->post($data,$type);
         }
 
         $post['seller_name'] = $this->postSellerName;
@@ -100,8 +103,11 @@ class avitoPost {
 
         $post['location_id'] = $this->postLocationId;
 
-        $post['category_id'] = $this->postCategory['telephone'];
-        $post['params[143]'] = $this->postParams['iphone'];
+        $post['category_id'] = $this->postCategoryConfig[$type];
+
+        foreach ($this->postParamsConfig[$type] as $p_name => $p_value) {
+            $post[$p_name] = $p_value;
+        }
 
         $post['service_code'] = 'free';
         $post['manager'] = '';
