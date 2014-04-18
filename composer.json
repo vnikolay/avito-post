@@ -1,0 +1,26 @@
+{
+    "name": "geraltrivyan/avitoPost",
+    "description": "Script for automatic posting to avito free commercial",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Igor Cherkasov",
+            "email": "geraltr@gmail.com"
+        }
+    ],
+    "keywords": [
+        "avito"
+    ],
+    "homepage": "http://milsdev.com/",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/geraltrivyan/avitoPost.git"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3"
+    },
+    "minimum-stability": "dev"
+}
