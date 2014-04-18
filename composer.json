@@ -25,7 +25,10 @@
     "autoload": {
         "psr-0": {
             "avitoPost": "/"
-        }
+        },
+        "classmap": [
+            ""
+        ]
     },
     "minimum-stability": "dev"
 }
